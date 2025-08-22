@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi Calculator Pro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #0000FF;
+      color: lightgreen;
+      text-align: center;
+      padding: 1rem;
+    }
+    nav {
+      background: #336;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 1rem;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background: #4caf52;
+    }
+    .calculator, .page {
+      display: none;
+      max-width: 700px;
+      margin: 2rem auto;
+      background: pink;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select, button, textarea {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button.calculate {
+      background: #4CAF50;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      text-align:center;
+      padding:1rem;
+      background:#333;
+      color:white;
+    }
+    footer a {
+      color:lightgreen;
+      text-decoration:none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration:underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Multi Calculator Pro</h1>
+    <p>Free Online Professional Calculators</p>
+  </header>  
+
+  <nav>
+    <button onclick="showCalc('basic')">Basic</button>
+    <button onclick="showCalc('bmi')">BMI</button>
+    <button onclick="showCalc('loan')">Loan</button>
+    <button onclick="showCalc('age')">Age</button>
+  </nav>  
+
+  <!-- Basic Calculator -->
+  <div id="basic" class="calculator">
+    <h2>Basic Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">×</option>
+      <option value="/">÷</option>
+    </select>
+    <input type="number" id="num2" placeholder="Enter second number">
+    <button class="calculate" onclick="basicCalc()">Calculate</button>
+    <p id="basicResult"></p>
+  </div>  
+
+  <!-- BMI Calculator -->
+  <div id="bmi" class="calculator">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="weight" placeholder="Enter weight in kg">
+    <input type="number" id="height" placeholder="Enter height in cm">
+    <button class="calculate" onclick="bmiCalc()">Calculate</button>
+    <p id="bmiResult"></p>
+  </div>  
+
+  <!-- Loan Calculator -->
+  <div id="loan" class="calculator">
+    <h2>Loan Calculator</h2>
+    <input type="number" id="loanAmount" placeholder="Loan Amount">
+    <input type="number" id="interestRate" placeholder="Interest Rate (%)">
+    <input type="number" id="loanYears" placeholder="Years">
+    <button class="calculate" onclick="loanCalc()">Calculate</button>
+    <p id="loanResult"></p>
+  </div>  
+
+  <!-- Age Calculator -->
+  <div id="age" class="calculator">
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <button class="calculate" onclick="ageCalc()">Calculate</button>
+    <p id="ageResult"></p>
+  </div>  
+
+  <!-- Privacy Policy Page -->
+  <div id="privacy" class="page">
+    <h2>Privacy Policy</h2>
+    <p><strong>Multi Calculator Pro</strong> respects your privacy. This Privacy Policy explains what data we collect, how we use it, and how we protect it.</p>
+    <ul>
+      <li><b>Data we collect:</b> We do not collect personal data from users. Non-personal information like browser type or device may be logged for analytics.</li>
+      <li><b>Cookies:</b> Our site may use cookies to improve user experience.</li>
+      <li><b>Third-party services:</b> If we display ads (e.g., Google AdSense), they may use their own cookies and policies.</li>
+      <li><b>Policy updates:</b> This Privacy Policy may be updated; check this page for changes.</li>
+      <li><b>Contact:</b> For any questions, email us at <a href="mailto:contact@example.com">contact@example.com</a>.</li>
+    </ul>
+  </div>
+
+  <!-- Terms Page -->
+  <div id="terms" class="page">
+    <h2>Terms & Conditions</h2>
+    <p>By using <strong>Multi Calculator Pro</strong>, you agree to the following:</p>
+    <ul>
+      <li>This site is for educational and informational purposes only.</li>
+      <li>We are not responsible for errors in calculations.</li>
+      <li>You agree to use this site responsibly and not misuse its features.</li>
+    </ul>
+  </div>
+
+  <!-- Contact Page -->
+  <div id="contact" class="page">
+    <h2>Contact Us</h2>
+    <p>If you have any questions, feedback, or business inquiries, please contact us:</p>
+    <form action="mailto:contact@example.com" method="post" enctype="text/plain">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+      
+      <button type="submit" class="calculate">Send Message</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Multi Calculator Pro | All Rights Reserved</p>
+    <p>
+      <a href="#" onclick="showPage('privacy')">Privacy Policy</a> | 
+      <a href="#" onclick="showPage('terms')">Terms</a> | 
+      <a href="#" onclick="showPage('contact')">Contact Us</a>
+    </p>
+  </footer>
+
+  <script>
+    function showCalc(id) {
+      document.querySelectorAll('.calculator, .page').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    function showPage(id) {
+      document.querySelectorAll('.calculator, .page').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      window.scrollTo(0,0);
+    }
+
+    function basicCalc() {
+      let num1 = parseFloat(document.getElementById('num1').value);
+      let num2 = parseFloat(document.getElementById('num2').value);
+      let op = document.getElementById('operator').value;
+      let result;
+      if (op === '+') result = num1 + num2;
+      if (op === '-') result = num1 - num2;
+      if (op === '*') result = num1 * num2;
+      if (op === '/') result = num2 !== 0 ? num1 / num2 : 'Error (divide by 0)';
+      document.getElementById('basicResult').innerText = 'Result: ' + result;
+    }
+
+    function bmiCalc() {
+      let w = parseFloat(document.getElementById('weight').value);
+      let h = parseFloat(document.getElementById('height').value) / 100;
+      if(!w || !h){ document.getElementById('bmiResult').innerText="Please enter valid data"; return; }
+      let bmi = (w / (h * h)).toFixed(2);
+      let category = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obese';
+      document.getElementById('bmiResult').innerText = 'BMI: ' + bmi + ' (' + category + ')';
+    }
+
+    function loanCalc() {
+      let amount = parseFloat(document.getElementById('loanAmount').value);
+      let rate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+      let months = parseInt(document.getElementById('loanYears').value) * 12;
+      if(!amount || !rate || !months){ document.getElementById('loanResult').innerText="Please fill all fields"; return; }
+      let emi = (amount * rate * Math.pow(1+rate, months)) / (Math.pow(1+rate, months) - 1);
+      document.getElementById('loanResult').innerText = 'Monthly EMI: ' + emi.toFixed(2);
+    }
+
+    function ageCalc() {
+      let dob = new Date(document.getElementById('dob').value);
+      if(!dob || dob.toString()==="Invalid Date") { document.getElementById('ageResult').innerText = "Please enter your DOB"; return; }
+      let diff = Date.now() - dob.getTime();
+      let ageDate = new Date(diff);
+      let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+      document.getElementById('ageResult').innerText = 'Age: ' + age + ' years';
+    }
+  </script>
+</body>
+</html>
