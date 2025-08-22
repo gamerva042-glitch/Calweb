@@ -1,2 +1,2 @@
 # Calweb
-"My first HTML, CSS, JavaScript project – Calculator Website."
+"My first HTML,project – Calculator Website."
